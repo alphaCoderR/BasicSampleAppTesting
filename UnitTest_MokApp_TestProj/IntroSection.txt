@@ -1,0 +1,60 @@
+﻿*********** Mocking Overview ***********
+
+An object under test may have dependencies on other objects. Mocking is replacing the actual dependency,
+with a test time only value version that enables easier isolation of code that we wamt to test.
+So we can program them to return some values or even throw exceptions if we want to test those
+scenarios.
+
+Mocking should be implemented only when interfaces are defined in your project.
+Sometimes when interface is not neededand just for the use of mock, adding an interface to 
+the project is not a good approach.
+
+[Test] - Is used in NUnit
+[Fact] - Is used in XUnit
+
+// ****** Setting up parametrized test cases with conditioning ********
+
+****** In XUnit ******
+using Xunit;
+
+public class FizzBuzzTests
+{
+    [Theory]
+    [InlineData(3, "Fizz")]
+    [InlineData(5, "Buzz")]
+    [InlineData(15, "FizzBuzz")]
+    [InlineData(4, "4")]
+    public void Test_FizzBuzz(int number, string expected)
+    {
+        // Arrange
+        var fizzBuzz = new FizzBuzz();
+
+        // Act
+        var result = fizzBuzz.Generate(number);
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+}
+
+****** In NUnit ******
+[Test]
+[TestCase(200,100)]
+[TestCase(200,150)]
+[TestCase(200,300)]
+
+public void funcName(balance, withdrawAmt)
+{
+    var logMock = new Mock<InterfaceName>();
+
+    // This func1 will return true for any string value
+    logMock.Setup(u=>u.func1(It.IsAny<string>())).Returns(true);
+
+    // This func2 will return true if there is an integer passed asnd the integer should be greater than 0
+    logMock.Setup(u=>u.func2(It.Is<int>(x=>x>0))).Returns(true);
+
+    testClass tc = new(logMock.Object);
+    testClass.testFunc1(balance);
+    var result = testClass.testFunc2(withdraw);
+    Assert.IsTrue(result);
+}
