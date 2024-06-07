@@ -1,0 +1,6 @@
+@UnitTest_MokApp_HostAddress = http://localhost:5271
+
+GET {{UnitTest_MokApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
