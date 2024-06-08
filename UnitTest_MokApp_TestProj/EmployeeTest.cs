@@ -14,32 +14,38 @@ namespace UnitTest_MokApp_TestProj
        
         #endregion
 
-        [Fact]
-        
-        public async void GetEmployeebyId()
+        [Theory]
+        [InlineData(1, "JK")]
+        [InlineData(2, "DK")]
+        [InlineData(3, "PK")]
+        public async void GetEmployeebyId(int id, string res)
         {
             // Mok can also be initialized inside a function 
             // var mock = new Mock<interface_name>();
 
             // mock.Setup(p => p.NameOfTheFunc(Parameter_Value)).ReturnsAsync(The value it should return-);
 
-            mock.Setup(p => p.GetEmployeebyId(1)).ReturnsAsync("JK");
+            mock.Setup(p => p.GetEmployeebyId(id)).ReturnsAsync(res);
             EmployeeController emp = new EmployeeController(mock.Object);
-            string result = await emp.GetEmployeeById(1);
-            Assert.Equal("JK", result);
+            string result = await emp.GetEmployeeById(id);
+            Assert.Equal(res, result);
         }
-        [Fact]
-        public async void GetEmployeeDetails()
+
+        [Theory]
+        [InlineData(1, "JK", "SDE")]
+        [InlineData(2, "DK", "SE")]
+        [InlineData(3, "PK", "DBA")]
+        public async void GetEmployeeDetails(int id, string name, string designation)
         {
             var employeeDTO = new Employee()
             {
-                Id = 1,
-                Name = "JK",
-                Desgination = "SDE"
+                Id = id,
+                Name = name,
+                Desgination = designation
             };
-            mock.Setup(p => p.GetEmployeeDetails(1)).ReturnsAsync(employeeDTO);
+            mock.Setup(p => p.GetEmployeeDetails(id)).ReturnsAsync(employeeDTO);
             EmployeeController emp = new EmployeeController(mock.Object);
-            var result = await emp.GetEmployeeDetails(1);
+            var result = await emp.GetEmployeeDetails(id);
             Assert.True(employeeDTO.Equals(result));
         }
     }
