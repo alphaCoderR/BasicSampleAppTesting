@@ -31,5 +31,11 @@ namespace UnitTest_MokApp.Services
             var emp = await _appDbContext.Employees.FirstOrDefaultAsync(c => c.Id == EmpID);
             return emp;
         }
+
+        public async Task<IEnumerable<Employee>> GetAllEmployeeDetails()
+        {
+            var empList = await _appDbContext.Employees.ToArrayAsync();
+            return empList;
+        }
     }
 }

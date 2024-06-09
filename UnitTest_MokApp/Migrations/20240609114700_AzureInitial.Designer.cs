@@ -11,8 +11,8 @@ using UnitTest_MokApp.Model;
 namespace UnitTest_MokApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240607075949_initial")]
-    partial class initial
+    [Migration("20240609114700_AzureInitial")]
+    partial class AzureInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

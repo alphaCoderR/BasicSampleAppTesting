@@ -10,5 +10,7 @@ namespace UnitTest_MokApp.Services
     {
         Task<string> GetEmployeebyId(int EmpID);
         Task<Employee> GetEmployeeDetails(int EmpID);
+
+        Task<IEnumerable<Employee>> GetAllEmployeeDetails();
     }
 }

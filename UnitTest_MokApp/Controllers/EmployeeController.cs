@@ -31,5 +31,12 @@ namespace UnitTest_MokApp.Controllers
             var result = await _employeeService.GetEmployeeDetails(EmpID);
             return result;
         }
+
+        [HttpGet(nameof(GetAllEmployeeDetails))]
+        public async Task<IEnumerable<Employee>> GetAllEmployeeDetails()
+        {
+            var resultList = await _employeeService.GetAllEmployeeDetails();
+            return resultList;
+        }
     }
 }

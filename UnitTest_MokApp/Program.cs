@@ -6,7 +6,8 @@ using UnitTest_MokApp.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(item => item.UseSqlServer(builder.Configuration.GetConnectionString("myconn")));
+var connectionString = builder.Configuration.GetConnectionString("AzureDbConnStr");
+builder.Services.AddDbContext<AppDbContext>(item => item.UseSqlServer(connectionString));
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
 builder.Services.AddControllers();
